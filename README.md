@@ -23,9 +23,8 @@ A lightweight, powerful, and highly customizable Swift Package for rendering mat
 4. [Composing Custom Wave Shapes](#composing-custom-wave-shapes)
 5. [2D vs 3D Rendering Modes](#2d-vs-3d-rendering-modes)
 6. [Complete API Reference](#complete-api-reference)
-7. [Migrating from Pre-1.0 Modifiers](#migrating-from-pre-10-modifiers)
-8. [Included Examples & Demos](#included-examples--demos)
-9. [Simulator Target Troubleshooting](#simulator-target-troubleshooting)
+7. [Included Examples & Demos](#included-examples--demos)
+8. [Simulator Target Troubleshooting](#simulator-target-troubleshooting)
 
 ---
 
