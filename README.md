@@ -232,26 +232,6 @@ WaveKit uses SwiftUI environment keys under the hood, but the public surface is 
 
 ---
 
-## Migrating from Pre-1.0 Modifiers
-
-The original fine-grained modifiers remain available as deprecated wrappers around the same underlying state, so existing code keeps compiling — except where noted as a hard break.
-
-| Old | New |
-|---|---|
-| `.amplitude()`, `.frequency()`, `.phase()` | `.waveform(amplitude:frequency:phase:)` |
-| `.waveColor()`, `.waveLineWidth()`, `.gradient()`, `.gradientDirection()` | `.waveStyle(_:)` |
-| `.animated()` + `.animationSpeed()` | `.animated(speed:)` |
-| `.renderMode3D(true)` | *(default now — remove the call)* |
-| `.renderMode3D(false)` | `.render2D()` |
-| `.isECG(true)` / `.isPureTone(true)` | Compose the shape via `WaveFunction` — see [Composing Custom Wave Shapes](#composing-custom-wave-shapes) |
-| `.showGrid(_:)` | **Removed.** Use `.gridStyle(.init(lineCount: 0))` to hide, or `.gridStyle(.dense)` / `.dropLineStyle(.dense)` |
-| `.showInterference()`, `.targetFunction()`, `.targetAmplitude()`, `.targetFrequency()`, `.targetPhase()`, `.targetColor()`, `.isAligning()` | `.interference(with: TargetWave(...))`, or `.interference(with: nil)` to disable |
-
-> [!WARNING]
-> `.showGrid(_:)` has no direct drop-in replacement modifier — it's removed outright. Apps using it must migrate to `.gridStyle(...)` / `.dropLineStyle(...)`, since grid and drop lines are now independently controlled.
-
----
-
 ## Included Examples & Demos
 
 The library package includes an executable suite (`WaveKitExample`) with a premium, glassmorphic dark-mode dashboard showcasing 8 visualization demos:
