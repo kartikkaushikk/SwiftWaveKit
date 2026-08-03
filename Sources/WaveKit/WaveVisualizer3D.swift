@@ -245,8 +245,10 @@ struct WaveVisualizer3D: PlatformViewRepresentable {
             let dz = groundDist * cos(az)
             
             #if os(macOS)
+//            cameraNode?.camera?.fieldOfView = CGFloat(cameraAngle.fov)
             cameraNode?.position = SCNVector3(CGFloat(6.0 + dx), CGFloat(-1.0 + dy), CGFloat(5.0 + dz))
             #else
+            cameraNode?.camera?.fieldOfView = CGFloat(cameraAngle.fov)
             cameraNode?.position = SCNVector3(6.0 + dx, -1.0 + dy, 5.0 + dz)
             #endif
             cameraNode?.look(at: SCNVector3(6.0, -1.0, 5.0))

@@ -1,0 +1,70 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test (Xcode ${{ matrix.xcode }})
+    runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: ["16.0", "16.2"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - name: Show Swift version
+        run: swift --version
+
+      - name: Cache SPM dependencies
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ matrix.xcode }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-${{ matrix.xcode }}-
+
+      - name: Build
+        run: swift build -v
+
+      - name: Run tests
+        run: swift test -v --enable-code-coverage
+
+      - name: Generate coverage report
+        run: |
+          xcrun llvm-cov export \
+            .build/debug/WaveKitPackageTests.xctest/Contents/MacOS/WaveKitPackageTests \
+            -instr-profile .build/debug/codecov/default.profdata \
+            -format lcov > coverage.lcov
+        continue-on-error: true
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.lcov
+        continue-on-error: true
+
+  ios-build:
+    name: Build for iOS
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+
+      - name: Build for iOS Simulator
+        run: |
+          xcodebuild build \
+            -scheme WaveKit \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2' \
+            -skipMacroValidation
