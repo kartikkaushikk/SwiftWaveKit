@@ -62,9 +62,12 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode_16.2.app
 
+      - name: List available simulators
+        run: xcrun simctl list devices available
+
       - name: Build for iOS Simulator
         run: |
           xcodebuild build \
             -scheme WaveKit \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2' \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
             -skipMacroValidation
