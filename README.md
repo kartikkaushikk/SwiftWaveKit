@@ -42,7 +42,7 @@ https://github.com/kartikkaushikk/SwiftWaveKit.git
 Add it as a dependency in your package manifest:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/kartikkaushikk/SwiftWaveKit", from: "0.1.1")
+    .package(url: "https://github.com/kartikkaushikk/SwiftWaveKit", from: "1.0.0")
 ]
 ```
 Then add the library target to your dependencies:

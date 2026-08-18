@@ -6,7 +6,7 @@ For the full reasoning behind these changes, see [docs/DESIGN.md](docs/DESIGN.md
 
 ---
 
-## [Unreleased]
+## [1.0.0] - Stable Release
 
 ### Added
 - `.waveform(amplitude:frequency:phase:)` combinator modifier.
