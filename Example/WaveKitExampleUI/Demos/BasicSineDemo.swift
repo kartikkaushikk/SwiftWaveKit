@@ -3,46 +3,17 @@ import WaveKit
 
 struct BasicSineDemo: View {
     var body: some View {
-        ZStack {
-            // Background
-            LinearGradient(
-                colors: [Color(red: 0.08, green: 0.08, blue: 0.18), Color.black],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
+        ScrollView {
             VStack(spacing: 30) {
-                // Header
-                VStack(spacing: 8) {
-                    Text("Basic Sine Wave")
-                        .font(.system(size: 28, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
-                    Text("Single pure tone frequency visualizer")
-                        .font(.system(.subheadline, design: .rounded))
-                        .foregroundColor(.gray)
-                }
-                .padding(.top, 20)
-                
-                // 3D Wave Box using WaveView + modifiers
-                ZStack {
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .fill(Color.white.opacity(0.04))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                .stroke(Color.white.opacity(0.08), lineWidth: 1)
-                        )
-                        .shadow(color: .black.opacity(0.4), radius: 20, x: 0, y: 10)
-                    
-                    WaveView(.sine)
-                        .waveform(amplitude: 1.0, frequency: 2.0)
-                        .waveStyle(.neon)
-                        .animated(speed: 1.0)
-                        .gridStyle(.subtle)
-                        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                }
-                .frame(height: 280)
-                .padding(.horizontal, 20)
+                // 3D Wave using WaveView + modifiers
+                WaveView(.sine)
+                    .waveform(amplitude: 1.0, frequency: 2.0)
+                    .waveStyle(.neon)
+                    .animated(speed: 1.0)
+                    .gridStyle(.subtle)
+                    .frame(height: 280)
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .padding(.horizontal, 20)
                 
                 CodeSnippetView(code: """
                 WaveView(.sine)
@@ -54,8 +25,11 @@ struct BasicSineDemo: View {
                 
                 Spacer()
             }
+            .padding(.top, 20)
         }
+        .navigationTitle("Basic Sine Wave")
         .navigationBarTitleDisplayMode(.inline)
+
     }
 }
 

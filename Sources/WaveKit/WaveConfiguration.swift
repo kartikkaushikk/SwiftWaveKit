@@ -130,14 +130,14 @@ public struct WaveCameraConfig: Sendable, Equatable {
     public var elevation: Double
     public var distance: Double
 
-    public init(azimuth: Double = 45.0, elevation: Double = 25.0, distance: Double = 25.0) {
+    public init(azimuth: Double = 45.0, elevation: Double = 25.0, distance: Double = 80.0) {
         self.azimuth = azimuth
         self.elevation = elevation
         self.distance = distance
     }
 
-    public static let front = WaveCameraConfig(azimuth: 0, elevation: 0, distance: 25.0)
-    public static let iso = WaveCameraConfig(azimuth: 45, elevation: 25, distance: 25.0)
+    public static let front = WaveCameraConfig(azimuth: 0, elevation: 0, distance: 80.0)
+    public static let iso = WaveCameraConfig(azimuth: -60, elevation: -15, distance: 20.0)
 }
 
 /// Holds all configuration parameters for rendering a wave.
